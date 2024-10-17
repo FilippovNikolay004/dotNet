@@ -57,8 +57,7 @@ for (int i = 1; i < arrayOfExpression.Length; i++) {
         if (i == 1) {
             sum += Deff(int.Parse(arrayOfExpression[i - 1]), int.Parse(arrayOfExpression[i + 1]));
             Console.WriteLine(int.Parse(arrayOfExpression[i - 1]) + " - " + int.Parse(arrayOfExpression[i + 1]) + " = " + sum);
-        }
-        else {
+        } else {
             sum += Deff(sum, int.Parse(arrayOfExpression[i + 1]));
             Console.WriteLine(sum + " - " + int.Parse(arrayOfExpression[i + 1]) + " = " + sum);
         }
@@ -74,8 +73,7 @@ Console.WriteLine("Summa: " + sum);
 #region Задание 6
 //TASK:
 //Пользователь с клавиатуры вводит некоторый текст.
-//Приложение должно изменять регистр первой буквы
-//каждого предложения на букву в верхнем регистре.
+//Приложение должно изменять регистр первой буквы каждого предложения на букву в верхнем регистре.
 #endregion
 
 
