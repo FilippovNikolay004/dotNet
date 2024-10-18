@@ -29,16 +29,59 @@ namespace MyDateNameSpace {
 
         public string PrintDate() { return Day.ToString() + "." + Month.ToString() + "." + Year.ToString(); }
 
-        public int DaysDifference() {
-            int result = 0;
+        public static int DaysDifference(MyDate dateOld, MyDate dateNew) {
+            //(29, 09, 2023);
+            //(18, 10, 2024);
 
-            return result;
+            if (dateOld.Day > dateNew.day || dateOld.Month > dateNew.Month || dateOld.Year > dateNew.Year) {
+                MyDate temp = dateNew;
+                dateNew = dateOld;
+                dateOld = temp;
+            }
+
+            int day = dateOld.Day;
+            int month = dateOld.Month;
+            int year = dateOld.Year;
+            
+            bool isFullMonth = false;
+            int valueDay = 0;
+
+            while (day != dateNew.Day || month != dateNew.Month || year != dateNew.Year) {
+                day++;
+                valueDay++;
+
+                if (day > (isFullMonth ? 30 : 31)) {
+                    day = 1;
+                    month++;
+
+                    if (month > 12) {
+                        isFullMonth = true;
+                        month = 1;
+                        year++;
+                    }
+                }
+            }
+
+            return valueDay;
         }
 
-        public int AddDaysToDate() {
-            int result = 0;
+        public void AddDaysToDate(int valueDay) {
+            bool isFullMonth = false;
 
-            return result;
+            for (int i = 0; i < valueDay; i++) {
+                this.Day++;
+
+                if (this.Day > (isFullMonth ? 30 : 31)) {
+                    this.Day = 1;
+                    this.Month++;
+
+                    if (this.Month > 12) {
+                        isFullMonth = true;
+                        this.Month = 1;
+                        this.Year++;
+                    }
+                }
+            }
         }
     }
 }
