@@ -125,7 +125,7 @@ namespace Games {
                 Console.Write("Выберите клетку: ");
                 userChoice = int.Parse(Console.ReadLine());
 
-                isNext = userChoice >= freeFields.Length || userChoice <= 0;
+                isNext = !(userChoice >= 1 && userChoice <= freeFields.Length);
                 if (isNext) {
                     Console.WriteLine("Вы выбрали не существующую клетку!\n");
                     continue;
