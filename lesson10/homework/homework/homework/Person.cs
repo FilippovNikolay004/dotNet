@@ -43,6 +43,7 @@ namespace homework {
             Console.WriteLine($"Average: {Average}");
             Console.WriteLine($"Number Of Group: {NumberOfGroup}");
         }
+        public bool IsStudentExistsByLastName(string SurName) { return SurName == this.SurName; }
     }
 
 
@@ -50,22 +51,59 @@ namespace homework {
         protected Student[] students;
         protected int count;
 
+        public AcademyGroup(params Student[] students) {
+            this.students = new Student[students.Length];
+            for (int i = 0; i < students.Length; i++) {
+                this.students[i] = students[i];
+            }
+        }
         public AcademyGroup() {
             count = 0;
             students = new Student[10];
         }
+        public AcademyGroup(int size) {
+            count = 0;
+            students = new Student[size];
+        }
 
         public void Print() {
-
+            for (int i = 0; i < students.Length;i++) { students[i].Print(); Console.WriteLine(""); }
         }
         public void Add(Student student) {
+            Student[] tempStudents = new Student[this.students.Length + 1];
+            for (int i = 0; i < this.students.Length; i++) {
+                tempStudents[i] = this.students[i];
+            }
 
+            tempStudents[this.students.Length] = student;
+            this.students = tempStudents;
         }
         public void Remove(string SurName) {
+            int index = FindStudentIndexByLastName(SurName);
+            if (index == -1) { Console.WriteLine("Такого студента нет!"); return; };
 
+            Student[] tempStudents = new Student[this.students.Length - 1];
+            for (int i = 0, j = 0; i < this.students.Length; i++) {
+                if (index != i) { tempStudents[j++] = this.students[i]; }
+            }
+
+            this.students = tempStudents;
         }
-        public void Edit(string SurName) {
+        public void Edit(string SurName, Student newStudent) {
+            int index = FindStudentIndexByLastName(SurName);
+            if (index == -1) { Console.WriteLine("Такого студента нет!"); return; };
 
+            students[index] = newStudent;
+        }
+
+        private int FindStudentIndexByLastName(string SurName) {
+            int index = -1;
+
+            for (int i = 0; i < students.Length; i++) {
+                if (students[i].IsStudentExistsByLastName(SurName)) { index = i; return index; }
+            }
+
+            return index;
         }
 
         // Работа с файлами
