@@ -3,6 +3,12 @@
 
 using System;
 
+class Test {
+    int a;
+
+    public int A { get; set; }
+}
+
 class Club : IComparable
 {
     public string Name { get; set; }
