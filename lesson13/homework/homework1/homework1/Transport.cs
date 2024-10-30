@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace homework1 {
-    internal class Transport {
+    internal abstract class Transport {
+
     }
 }
