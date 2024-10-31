@@ -27,6 +27,7 @@ interface IAirTr : ITransport {
 
     void TakeOff();
     void ItWillLand();
+    void PerformAction(string action);
 }
 
 
@@ -272,6 +273,29 @@ class Plane : IAirTr {
     public void Stop() {
         Console.WriteLine("Самолёт остановился");
     }
+
+    public void PerformAction(string action) {
+        switch (action.ToLower()) {
+        case "takeoff":
+            TakeOff();
+            break;
+        case "land":
+            ItWillLand();
+            break;
+        case "move":
+            Move();
+            break;
+        case "stop":
+            Stop();
+            break;
+        case "print":
+            Print();
+            break;
+        default:
+            throw new Exception("Некорректный выбор!");
+        }
+    }
+
     public void Print() {
         Console.WriteLine($"Plane:\n" +
             $"Maximum Height: {MaximumHeight}\n" +
@@ -313,6 +337,28 @@ class Helicopter : IAirTr {
     public void Stop() {
         Console.WriteLine("Вертолёт остановился");
     }
+
+    public void PerformAction(string action) {
+        switch (action.ToLower()) {
+        case "takeoff":
+            TakeOff();
+            break;
+        case "land":
+            ItWillLand();
+            break;
+        case "move":
+            Move();
+            break;
+        case "stop":
+            Stop();
+            break;
+        case "print":
+            Print();
+            break;
+        default:
+            throw new Exception("Некорректный выбор!");
+        }
+    }
     public void Print() {
         Console.WriteLine($"Helicopter:\n" +
             $"Maximum Height: {MaximumHeight}\n" +
@@ -353,6 +399,27 @@ class Airship : IAirTr {
     }
     public void Stop() {
         Console.WriteLine("Дерижабыль остановился");
+    }
+    public void PerformAction(string action) {
+        switch (action.ToLower()) {
+        case "takeoff":
+            TakeOff();
+            break;
+        case "land":
+            ItWillLand();
+            break;
+        case "move":
+            Move();
+            break;
+        case "stop":
+            Stop();
+            break;
+        case "print":
+            Print();
+            break;
+        default:
+            throw new Exception("Некорректный выбор!");
+        }
     }
     public void Print() {
         Console.WriteLine($"Airship:\n" +
@@ -399,5 +466,11 @@ class MainClass {
 
         transport = new Airship(3000, 15000.0, 25000.0, 120, 5000, 50);
         transport.Move();
+
+        if (transport is IAirTr airTransport) {
+            airTransport.TakeOff();
+            airTransport.PerformAction("move");
+            airTransport.ItWillLand();
+        }
     }
 }
